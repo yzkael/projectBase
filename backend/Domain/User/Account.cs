@@ -10,5 +10,6 @@ namespace backend.Domain.User
     {
         public Guid PersonId { get; set; }
         public Person Person { get; set; } = null!;
+        public bool IsActive { get; set; } = true;
     }
 }

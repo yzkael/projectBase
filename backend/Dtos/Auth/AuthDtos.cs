@@ -13,4 +13,10 @@ namespace backend.Dtos.Auth
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; } = null!;
     }
+    public class LoginResponseDto
+    {
+        public string Username { get; set; } = null!;
+        public string FullName { get; set; } = null!;
+        public List<string> Privilege { get; set; } = [];
+    }
 }

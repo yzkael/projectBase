@@ -9,7 +9,13 @@ namespace backend.Extensions
     {
         public static void AddServiceExtensions(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add your service extensions here
+
+            services.AddControllers();
+            services.AddOpenApi();
+            services.AddHttpContextAccessor();
+            services.AddProblemDetails();
+            services.AddExceptionHandler<GlobalExceptionHandler>();
+            services.AddHttpContextAccessor();
             services.ConfigureCors(configuration);
             services.ConfigureDbContext(configuration);
             services.ConfigureIdentity();

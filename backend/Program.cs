@@ -22,19 +22,12 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
-    builder.Services.AddControllers();
-    builder.Services.AddOpenApi();
-    builder.Services.AddHttpContextAccessor(); // Safely registered
-    builder.Services.AddProblemDetails();
-    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
     builder.Services.AddServiceExtensions(builder.Configuration);
 
     // 1. Build the app safely first
     var app = builder.Build();
-
     // 2. NOW configure Audit.NET using the fully built service provider
     var httpContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
-
     Audit.Core.Configuration.AddCustomAction(ActionType.OnScopeCreated, scope =>
     {
         // Use the safely resolved accessor from outside the lambda
@@ -50,7 +43,6 @@ try
             scope.SetCustomField("User", "Anonymous/System");
         }
     });
-
     Audit.Core.Configuration.Setup()
       .UsePostgreSql(config => config
           .ConnectionString(builder.Configuration.GetConnectionString("Default"))

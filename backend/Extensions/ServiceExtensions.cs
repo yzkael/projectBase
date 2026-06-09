@@ -94,6 +94,19 @@ namespace backend.Extensions
                     ValidAudience = configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key is not configured")))
                 };
+
+                // Setup for 0Auth 2.0 Setup refresh and access-token
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = ctx =>
+                    {
+                        if (!string.IsNullOrEmpty(ctx.Request.Cookies["access-token"]))
+                        {
+                            ctx.Token = ctx.Request.Cookies["access-token"];
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
         }
