@@ -1,0 +1,8 @@
+{
+  "WrongCredentials": {
+    "Values": {
+      "en": "The username or password you entered is incorrect.",
+      "es": "El usuario o contraseña son incorrectos."
+    }
+  }
+}

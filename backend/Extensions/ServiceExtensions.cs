@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Askmethat.Aspnet.JsonLocalizer.Extensions;
 using Audit.EntityFramework;
 using backend.Data;
 using backend.Data.SeederData;
@@ -138,5 +139,15 @@ namespace backend.Extensions
         {
             services.Configure<SudoData>(configuration.GetSection(SudoData.Section));
         }
+        public static void ConfigureLocalizator(this IServiceCollection services)
+        {
+            services.AddJsonLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+                options.FileEncoding = Encoding.UTF8;
+                options.CacheDuration = TimeSpan.FromMinutes(30);
+            });
+        }
+
     }
 }

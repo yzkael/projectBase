@@ -16,6 +16,7 @@ namespace backend.Extensions
             services.AddProblemDetails();
             services.AddExceptionHandler<GlobalExceptionHandler>();
             services.AddHttpContextAccessor();
+            services.ConfigureLocalizator();
             services.ConfigureCors(configuration);
             services.ConfigureDbContext(configuration);
             services.ConfigureIdentity();

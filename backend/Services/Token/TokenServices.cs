@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using backend.Domain.User;
 using Microsoft.AspNetCore.Identity;
@@ -17,11 +18,11 @@ namespace backend.Services.Token
         private readonly SymmetricSecurityKey _key;
         private readonly IConfiguration _config;
 
-        public TokenServices(IConfiguration config, SymmetricSecurityKey key, UserManager<Account> userManager)
+        public TokenServices(IConfiguration config, UserManager<Account> userManager)
         {
             _config = config;
-            _key = key;
-            _userManager = userManager;
+            var jwtKey = _config["JWT:Key"];
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey ?? throw new ArgumentNullException("JWT:Key"))); _userManager = userManager;
         }
 
         public async Task<string> GenerateAccessToken(Account userAccount)

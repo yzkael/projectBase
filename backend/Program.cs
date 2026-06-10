@@ -1,4 +1,5 @@
 using Audit.Core;
+using backend.Configuration;
 using backend.Data;
 using backend.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -57,12 +58,14 @@ try
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
+        // localhost:5088/scalar/v1
         app.MapOpenApi();
         app.MapScalarApiReference();
     }
 
     await app.InitialiseDatabaseAsync();
     app.UseHttpsRedirection();
+    app.UseCustomLocalization();
     app.UseExceptionHandler();
     app.MapControllers();
 
