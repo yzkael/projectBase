@@ -17,8 +17,7 @@ namespace backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthServices _authServices;
-        private readonly IJsonStringLocalizer _localizer; // 1. Use the JSON Localizer
-
+        private readonly IJsonStringLocalizer _localizer;
         public AuthController(IAuthServices authService, IJsonStringLocalizer localizer)
         {
             _authServices = authService;
@@ -37,5 +36,18 @@ namespace backend.Controllers
             }
             return Ok(loginResponse);
         }
+        [HttpPost]
+        [Route("logout")]
+        [AllowAnonymous]
+        public IActionResult Logout()
+        {
+            var logoutSuccesful = _authServices.Logout();
+            if (!logoutSuccesful)
+            {
+                return BadRequest(_localizer["LogoutFailed"].Value);
+            }
+            return Ok(_localizer["LogoutSuccess"].Value);
+        }
     }
+
 }

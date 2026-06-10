@@ -4,5 +4,17 @@
       "en": "The username or password you entered is incorrect.",
       "es": "El usuario o contraseña son incorrectos."
     }
+  },
+  "LogoutFailed": {
+    "Values": {
+      "en": "An error occurred while trying to log out. Please try again.",
+      "es": "Ocurrió un error al intentar cerrar sesión. Por favor, inténtalo de nuevo."
+    }
+  },
+  "LogoutSuccess": {
+    "Values": {
+      "en": "You have been logged out successfully.",
+      "es": "Has cerrado sesión correctamente."
+    }
   }
 }

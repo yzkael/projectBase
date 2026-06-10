@@ -9,5 +9,6 @@ namespace backend.Services.Auth
     public interface IAuthServices
     {
         public Task<LoginResponseDto?> Login(LoginRequestDto loginRequest);
+        public bool Logout();
     }
 }
